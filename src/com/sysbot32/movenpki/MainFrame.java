@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame {
-    public static final Font MALGUN = new Font("맑은 고딕", Font.PLAIN, 16);
-    public static final Color EXPORT_COLOR = new Color(0x42a5f5);
-    public static final Color IMPORT_COLOR = new Color(0xef5350);
+    public static final Font FONT_MALGUN = new Font("맑은 고딕", Font.PLAIN, 16);
+    public static final Color COLOR_EXPORT = new Color(0x42a5f5);
+    public static final Color COLOR_IMPORT = new Color(0xef5350);
 
     private JFrame frame;
     private JPanel contentPane;
@@ -23,10 +23,10 @@ public class MainFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane.setLayout(new FlowLayout());
-        exportButton.setFont(MainFrame.MALGUN);
-        importButton.setFont(MainFrame.MALGUN);
-        exportButton.setBackground(MainFrame.EXPORT_COLOR);
-        importButton.setBackground(MainFrame.IMPORT_COLOR);
+        exportButton.setFont(MainFrame.FONT_MALGUN);
+        importButton.setFont(MainFrame.FONT_MALGUN);
+        exportButton.setBackground(MainFrame.COLOR_EXPORT);
+        importButton.setBackground(MainFrame.COLOR_IMPORT);
 
         contentPane.add(exportButton);
         contentPane.add(importButton);

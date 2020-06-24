@@ -1,5 +1,6 @@
 package com.sysbot32.movenpki;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
@@ -62,5 +63,14 @@ public class Server {
         }
         data.flip();
         return data;
+    }
+
+    public static String getHostAddress() {
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

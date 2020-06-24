@@ -10,24 +10,28 @@ public class MainFrame {
 
     private JFrame frame;
     private JPanel contentPane;
+    private JLabel addressLabel;
     private JButton exportButton;
     private JButton importButton;
 
     public MainFrame() {
         frame = new JFrame("MoveNPKI");
         contentPane = (JPanel) frame.getContentPane();
+        addressLabel = new JLabel(Server.getHostAddress());
         exportButton = new JButton("PC → 스마트폰");
         importButton = new JButton("스마트폰 → PC");
 
-        frame.setSize(250, 120);
+        frame.setSize(250, 150);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane.setLayout(new FlowLayout());
-        exportButton.setFont(MainFrame.FONT_MALGUN);
-        importButton.setFont(MainFrame.FONT_MALGUN);
-        exportButton.setBackground(MainFrame.COLOR_EXPORT);
-        importButton.setBackground(MainFrame.COLOR_IMPORT);
+        addressLabel.setFont(FONT_MALGUN);
+        exportButton.setFont(FONT_MALGUN);
+        importButton.setFont(FONT_MALGUN);
+        exportButton.setBackground(COLOR_EXPORT);
+        importButton.setBackground(COLOR_IMPORT);
 
+        contentPane.add(addressLabel);
         contentPane.add(exportButton);
         contentPane.add(importButton);
     }

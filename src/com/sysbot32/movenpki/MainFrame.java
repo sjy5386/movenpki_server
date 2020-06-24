@@ -2,6 +2,7 @@ package com.sysbot32.movenpki;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.ByteBuffer;
 
 public class MainFrame {
     public static final Font FONT_MALGUN = new Font("맑은 고딕", Font.PLAIN, 16);
@@ -34,6 +35,21 @@ public class MainFrame {
         contentPane.add(addressLabel);
         contentPane.add(exportButton);
         contentPane.add(importButton);
+
+        exportButton.addActionListener(e -> {
+            new Archiver().zip("C:\\Program Files\\NPKI", "C:\\MoveNPKI\\NPKI.zip");
+            byte[] npki = new FileManager().read("C:\\MoveNPKI\\NPKI.zip");
+            Server server = Main.getServer();
+            server.send(ByteBuffer.wrap(npki));
+            JOptionPane.showMessageDialog(frame, "스마트폰에서 < PC → 스마트폰 > 버튼을 터치해주세요.");
+        });
+        importButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, "스마트폰에서 < 스마트폰 → PC > 버튼을 터치하고 < OK > 버튼을 클릭하세요.");
+            Server server = Main.getServer();
+            byte[] npki = server.receive().array();
+            new FileManager().write("C:\\MoveNPKI\\NPKI.zip", npki);
+            new Archiver().unzip("C:\\MoveNPKI\\NPKI.zip", "C:\\Program Files\\NPKI");
+        });
     }
 
     public JFrame getFrame() {

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Archiver {
     public void zip(String input, String output) {
         String[] files = searchDirectory(input);
         try {
+            makeDirectory(output);
             ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(output));
             for (String file : files) {
                 System.out.println(file);
@@ -44,13 +46,7 @@ public class Archiver {
                 String path = output;
                 String zipName = zipEntry.getName();
                 System.out.println(zipName);
-                int index = zipName.lastIndexOf('\\');
-                if (index != -1) {
-                    path += "\\" + zipName.substring(0, index);
-                }
-                if (!Files.isDirectory(Paths.get(path))) {
-                    Files.createDirectories(Paths.get(path));
-                }
+                makeDirectory(path, zipName);
                 FileOutputStream fileOutputStream = new FileOutputStream(output + "\\" + zipName);
                 byte[] buf = new byte[4096];
                 int len;
@@ -82,5 +78,26 @@ public class Archiver {
         } else {
             result.add(file.getPath());
         }
+    }
+
+    private void makeDirectory(String filename) throws Exception {
+        String path = filename.substring(0, filename.lastIndexOf("\\"));
+        Path p = Paths.get(path);
+        if (Files.isDirectory(p)) {
+            return;
+        }
+        Files.createDirectories(p);
+    }
+
+    private void makeDirectory(String path, String zipName) throws Exception {
+        int index = zipName.lastIndexOf("\\");
+        if (index != -1) {
+            path += "\\" + zipName.substring(0, index);
+        }
+        Path p = Paths.get(path);
+        if (Files.isDirectory(p)) {
+            return;
+        }
+        Files.createDirectories(p);
     }
 }

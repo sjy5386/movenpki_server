@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MoveNPKI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MoveNPKI_jar</output-path>
+    <root id="archive" name="MoveNPKI.jar">
+      <element id="module-output" name="MoveNPKI" />
+    </root>
+  </artifact>
+</component>

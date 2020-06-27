@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Objects;
 
 public class Server {
     public static final int PORT = 13681;
@@ -23,15 +24,15 @@ public class Server {
 
     public void accept() {
         try {
-            SocketChannel socketChannel = serverSocketChannel.accept();
-            System.out.println(socketChannel.getRemoteAddress() + "is connected.");
+            socketChannel = serverSocketChannel.accept();
+            System.out.println(socketChannel.getRemoteAddress() + " is connected.");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void send(ByteBuffer data) {
-        if (!socketChannel.isConnected()) {
+        if (!isConnected()) {
             return;
         }
 
@@ -48,6 +49,10 @@ public class Server {
     }
 
     public ByteBuffer receive() {
+        if (!isConnected()) {
+            return null;
+        }
+
         ByteBuffer size = ByteBuffer.allocate(Integer.BYTES);
         ByteBuffer data;
         try {
@@ -67,6 +72,10 @@ public class Server {
         }
         data.flip();
         return data;
+    }
+
+    public boolean isConnected() {
+        return Objects.nonNull(socketChannel) && socketChannel.isConnected();
     }
 
     public static String getHostAddress() {

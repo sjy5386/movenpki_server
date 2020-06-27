@@ -41,6 +41,7 @@ public class Server implements ConnectionCallback {
             SocketChannel socketChannel = serverSocketChannel.accept();
             Connection connection = new Connection(socketChannel, this);
             connections.add(connection);
+            connection.start();
             System.out.println(connection.socketAddress + " is connected.");
         } catch (Exception e) {
             e.printStackTrace();

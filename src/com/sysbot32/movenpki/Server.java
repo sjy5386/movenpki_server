@@ -5,13 +5,17 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class Server {
+public class Server implements ConnectionCallback {
     public static final int PORT = 13681;
 
     private ServerSocketChannel serverSocketChannel;
-    private SocketChannel socketChannel;
+    private List<Connection> connections;
+    private ExecutorService executorService;
 
     public Server() {
         try {
@@ -20,62 +24,55 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        connections = new ArrayList<>();
+        executorService = Executors.newSingleThreadExecutor();
+    }
+
+    public void start() {
+        executorService.submit(this::accepting);
+    }
+
+    public void stop() {
+        executorService.shutdownNow();
     }
 
     public void accept() {
         try {
-            socketChannel = serverSocketChannel.accept();
-            System.out.println(socketChannel.getRemoteAddress() + " is connected.");
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            Connection connection = new Connection(socketChannel, this);
+            connections.add(connection);
+            System.out.println(connection.socketAddress + " is connected.");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void send(ByteBuffer data) {
-        if (!isConnected()) {
-            return;
-        }
-
-        int size = data.capacity();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(Integer.BYTES + size);
-        byteBuffer.putInt(size);
-        byteBuffer.put(data);
-        data.flip();
-        try {
-            socketChannel.write(data);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void accepting() {
+        while (true) {
+            accept();
         }
     }
 
-    public ByteBuffer receive() {
-        if (!isConnected()) {
-            return null;
-        }
-
-        ByteBuffer size = ByteBuffer.allocate(Integer.BYTES);
-        ByteBuffer data;
-        try {
-            int ret = socketChannel.read(size);
-            size.flip();
-            if (ret == -1) {
-                return null;
-            }
-
-            data = ByteBuffer.allocate(size.getInt());
-            while (data.hasRemaining()) {
-                socketChannel.read(data);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        data.flip();
-        return data;
+    public void send(Connection connection, ByteBuffer data) {
+        connection.write(data);
     }
 
     public boolean isConnected() {
-        return Objects.nonNull(socketChannel) && socketChannel.isConnected();
+        return connections.size() > 0;
+    }
+
+    @Override
+    public void received(Connection connection, ByteBuffer data) {
+    }
+
+    @Override
+    public void disconnected(Connection connection) {
+        System.out.println(connection.socketAddress + " is disconnected.");
+        connections.remove(connection);
+    }
+
+    public Connection[] getConnections() {
+        return connections.toArray(new Connection[0]);
     }
 
     public static String getHostAddress() {

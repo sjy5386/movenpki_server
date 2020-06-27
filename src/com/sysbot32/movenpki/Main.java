@@ -9,9 +9,7 @@ public class Main {
         server = new Server();
 
         mainFrame.getFrame().setVisible(true);
-        new Thread(() -> {
-            server.accept();
-        }).start();
+        server.start();
     }
 
     public static MainFrame getMainFrame() {

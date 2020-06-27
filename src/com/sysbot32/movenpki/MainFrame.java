@@ -39,15 +39,11 @@ public class MainFrame {
         exportButton.addActionListener(e -> {
             new Archiver().zip("C:\\Program Files\\NPKI", "C:\\MoveNPKI\\NPKI.zip");
             byte[] npki = new FileManager().read("C:\\MoveNPKI\\NPKI.zip");
-            Server server = Main.getServer();
-            server.send(ByteBuffer.wrap(npki));
             JOptionPane.showMessageDialog(frame, "스마트폰에서 < PC → 스마트폰 > 버튼을 터치해주세요.");
         });
         importButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(frame, "스마트폰에서 < 스마트폰 → PC > 버튼을 터치하고 < OK > 버튼을 클릭하세요.");
-            Server server = Main.getServer();
-            byte[] npki = server.receive().array();
-            new FileManager().write("C:\\MoveNPKI\\NPKI.zip", npki);
+            new FileManager().write("C:\\MoveNPKI\\NPKI.zip", null);
             new Archiver().unzip("C:\\MoveNPKI\\NPKI.zip", "C:\\Program Files\\NPKI");
         });
     }

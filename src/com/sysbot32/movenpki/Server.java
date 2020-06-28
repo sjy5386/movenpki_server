@@ -46,6 +46,7 @@ public class Server implements ConnectionCallback {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Main.getMainFrame().getConnectionPanel().getConnectionList().setListData(getConnections());
     }
 
     private void accepting() {
@@ -70,6 +71,7 @@ public class Server implements ConnectionCallback {
     public void disconnected(Connection connection) {
         System.out.println(connection.socketAddress + " is disconnected.");
         connections.remove(connection);
+        Main.getMainFrame().getConnectionPanel().getConnectionList().setListData(getConnections());
     }
 
     public Connection[] getConnections() {

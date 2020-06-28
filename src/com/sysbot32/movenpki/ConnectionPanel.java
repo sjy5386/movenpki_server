@@ -29,4 +29,8 @@ public class ConnectionPanel {
     public JPanel getPanel() {
         return panel;
     }
+
+    public JList<Connection> getConnectionList() {
+        return connectionList;
+    }
 }

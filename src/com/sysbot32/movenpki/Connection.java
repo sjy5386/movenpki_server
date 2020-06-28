@@ -91,4 +91,9 @@ public class Connection {
         }
         callback.disconnected(this);
     }
+
+    @Override
+    public String toString() {
+        return socketAddress.toString();
+    }
 }

@@ -34,4 +34,8 @@ public class MainFrame {
     public JFrame getFrame() {
         return frame;
     }
+
+    public ConnectionPanel getConnectionPanel() {
+        return connectionPanel;
+    }
 }

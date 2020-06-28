@@ -59,16 +59,18 @@ public class Connection {
             return;
         }
 
-        int size = data.capacity();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(Integer.BYTES + size);
-        byteBuffer.putInt(size);
-        byteBuffer.put(data);
-        data.flip();
-        try {
-            socketChannel.write(data);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new Thread(() -> {
+            int size = data.capacity();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(Integer.BYTES + size);
+            byteBuffer.putInt(size);
+            byteBuffer.put(data);
+            byteBuffer.flip();
+            try {
+                socketChannel.write(byteBuffer);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void reading() {

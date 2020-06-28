@@ -2,6 +2,8 @@ package com.sysbot32.movenpki;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.ByteBuffer;
+import java.util.Objects;
 
 public class ButtonPanel {
     private JPanel panel;
@@ -23,6 +25,20 @@ public class ButtonPanel {
 
         panel.add(exportButton);
         panel.add(importButton);
+
+        exportButton.addActionListener(e -> {
+            Connection connection = ConnectionPanel.getConnectionPanel().getConnectionList().getSelectedValue();
+            if (Objects.isNull(connection)) {
+                JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "공인인증서를 내보낼 스마트폰을 선택하세요.");
+                return;
+            }
+            new Archiver().zip("C:\\Program Files\\NPKI", "NPKI.zip");
+            byte[] npki = new FileManager().read("NPKI.zip");
+            Server.getServer().send(connection, ByteBuffer.wrap(npki));
+            JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "완료되었습니다.");
+        });
+        importButton.addActionListener(e -> {
+        });
 
         buttonPanel = this;
     }

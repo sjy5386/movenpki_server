@@ -81,7 +81,11 @@ public class Archiver {
     }
 
     private void makeDirectory(String filename) throws Exception {
-        String path = filename.substring(0, filename.lastIndexOf("\\"));
+        int index = filename.lastIndexOf("\\");
+        if (index == -1) {
+            return;
+        }
+        String path = filename.substring(0, index);
         Path p = Paths.get(path);
         if (Files.isDirectory(p)) {
             return;

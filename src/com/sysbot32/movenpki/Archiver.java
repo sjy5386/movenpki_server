@@ -94,7 +94,7 @@ public class Archiver {
     }
 
     private void makeDirectory(String path, String zipName) throws Exception {
-        int index = zipName.lastIndexOf("\\");
+        int index = zipName.lastIndexOf("/");
         if (index != -1) {
             path += "\\" + zipName.substring(0, index);
         }

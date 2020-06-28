@@ -38,6 +38,20 @@ public class ButtonPanel {
             JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "완료되었습니다.");
         });
         importButton.addActionListener(e -> {
+            Connection connection = ConnectionPanel.getConnectionPanel().getConnectionList().getSelectedValue();
+            if (Objects.isNull(connection)) {
+                JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "공인인증서를 가져올 스마트폰을 선택하세요.");
+                return;
+            }
+            ByteBuffer receivedData = connection.getReceivedData();
+            if (Objects.isNull(receivedData)) {
+                JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "스마트폰에서 < 스마트폰 → PC > 버튼을 터치하세요.");
+                return;
+            }
+            byte[] npki = receivedData.array();
+            new FileManager().write("NPKI.zip", npki);
+            new Archiver().unzip("NPKI.zip", "C:\\Program Files\\NPKI");
+            JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "완료되었습니다.");
         });
 
         buttonPanel = this;

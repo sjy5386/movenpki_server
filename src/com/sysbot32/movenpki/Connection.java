@@ -12,6 +12,7 @@ public class Connection {
     public final SocketAddress socketAddress;
     private final ConnectionCallback callback;
     private ExecutorService executorService;
+    private ByteBuffer receivedData = null;
 
     public Connection(SocketChannel socketChannel, ConnectionCallback callback) throws Exception {
         this.socketChannel = socketChannel;
@@ -79,6 +80,7 @@ public class Connection {
             if (Objects.isNull(data)) {
                 break;
             }
+            receivedData = data;
             callback.received(this, data);
         }
         disconnect();
@@ -92,6 +94,10 @@ public class Connection {
             e.printStackTrace();
         }
         callback.disconnected(this);
+    }
+
+    public ByteBuffer getReceivedData() {
+        return receivedData;
     }
 
     @Override

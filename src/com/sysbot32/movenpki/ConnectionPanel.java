@@ -24,6 +24,10 @@ public class ConnectionPanel {
         panel.add(label, BorderLayout.NORTH);
         panel.add(connectionList, BorderLayout.CENTER);
         panel.add(disconnectButton, BorderLayout.SOUTH);
+
+        disconnectButton.addActionListener(e -> {
+            connectionList.getSelectedValue().disconnect();
+        });
     }
 
     public JPanel getPanel() {

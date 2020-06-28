@@ -21,7 +21,7 @@ public class Archiver {
             ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(output));
             for (String file : files) {
                 System.out.println(file);
-                zipOutputStream.putNextEntry(new ZipEntry(file.replace(input + "\\", "")));
+                zipOutputStream.putNextEntry(new ZipEntry(file.replace(input + "\\", "").replace('\\', '/')));
                 FileInputStream fileInputStream = new FileInputStream(file);
                 int len = (int) Files.size(Paths.get(file));
                 if (len > 0) {

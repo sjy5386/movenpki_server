@@ -8,6 +8,8 @@ public class ButtonPanel {
     private JButton exportButton;
     private JButton importButton;
 
+    private static ButtonPanel buttonPanel;
+
     public ButtonPanel() {
         panel = new JPanel();
         exportButton = new JButton("PC → 스마트폰");
@@ -21,9 +23,15 @@ public class ButtonPanel {
 
         panel.add(exportButton);
         panel.add(importButton);
+
+        buttonPanel = this;
     }
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public static ButtonPanel getButtonPanel() {
+        return buttonPanel;
     }
 }

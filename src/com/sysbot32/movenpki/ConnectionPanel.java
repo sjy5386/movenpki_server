@@ -9,6 +9,8 @@ public class ConnectionPanel {
     private JList<Connection> connectionList;
     private JButton disconnectButton;
 
+    private static ConnectionPanel connectionPanel;
+
     public ConnectionPanel() {
         panel = new JPanel();
         label = new JLabel("연결된 스마트폰: ");
@@ -28,6 +30,8 @@ public class ConnectionPanel {
         disconnectButton.addActionListener(e -> {
             connectionList.getSelectedValue().disconnect();
         });
+
+        connectionPanel = this;
     }
 
     public JPanel getPanel() {
@@ -36,5 +40,9 @@ public class ConnectionPanel {
 
     public JList<Connection> getConnectionList() {
         return connectionList;
+    }
+
+    public static ConnectionPanel getConnectionPanel() {
+        return connectionPanel;
     }
 }

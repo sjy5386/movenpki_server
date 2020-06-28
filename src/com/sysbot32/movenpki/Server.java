@@ -17,6 +17,8 @@ public class Server implements ConnectionCallback {
     private List<Connection> connections;
     private ExecutorService executorService;
 
+    private static Server server;
+
     public Server() {
         try {
             serverSocketChannel = ServerSocketChannel.open();
@@ -26,6 +28,8 @@ public class Server implements ConnectionCallback {
         }
         connections = new ArrayList<>();
         executorService = Executors.newSingleThreadExecutor();
+
+        server = this;
     }
 
     public void start() {
@@ -46,7 +50,7 @@ public class Server implements ConnectionCallback {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Main.getMainFrame().getConnectionPanel().getConnectionList().setListData(getConnections());
+        ConnectionPanel.getConnectionPanel().getConnectionList().setListData(getConnections());
     }
 
     private void accepting() {
@@ -71,7 +75,7 @@ public class Server implements ConnectionCallback {
     public void disconnected(Connection connection) {
         System.out.println(connection.socketAddress + " is disconnected.");
         connections.remove(connection);
-        Main.getMainFrame().getConnectionPanel().getConnectionList().setListData(getConnections());
+        ConnectionPanel.getConnectionPanel().getConnectionList().setListData(getConnections());
     }
 
     public Connection[] getConnections() {
@@ -85,5 +89,9 @@ public class Server implements ConnectionCallback {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static Server getServer() {
+        return server;
     }
 }

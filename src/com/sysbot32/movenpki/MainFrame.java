@@ -14,6 +14,8 @@ public class MainFrame {
     private ButtonPanel buttonPanel;
     private JLabel addressLabel;
 
+    private static MainFrame mainFrame;
+
     public MainFrame() {
         frame = new JFrame("MoveNPKI");
         contentPane = (JPanel) frame.getContentPane();
@@ -29,13 +31,15 @@ public class MainFrame {
         contentPane.add(connectionPanel.getPanel(), BorderLayout.WEST);
         contentPane.add(addressLabel, BorderLayout.CENTER);
         contentPane.add(buttonPanel.getPanel(), BorderLayout.SOUTH);
+
+        mainFrame = this;
     }
 
     public JFrame getFrame() {
         return frame;
     }
 
-    public ConnectionPanel getConnectionPanel() {
-        return connectionPanel;
+    public static MainFrame getMainFrame() {
+        return mainFrame;
     }
 }

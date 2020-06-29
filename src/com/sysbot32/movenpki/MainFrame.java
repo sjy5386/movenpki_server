@@ -10,6 +10,7 @@ public class MainFrame {
 
     private JFrame frame;
     private JPanel contentPane;
+    private BrowsingPanel browsingPanel;
     private ConnectionPanel connectionPanel;
     private ButtonPanel buttonPanel;
     private JLabel addressLabel;
@@ -19,6 +20,7 @@ public class MainFrame {
     public MainFrame() {
         frame = new JFrame("MoveNPKI");
         contentPane = (JPanel) frame.getContentPane();
+        browsingPanel = new BrowsingPanel();
         connectionPanel = new ConnectionPanel();
         buttonPanel = new ButtonPanel();
         addressLabel = new JLabel(Server.getHostAddress());
@@ -28,8 +30,9 @@ public class MainFrame {
         contentPane.setLayout(new BorderLayout());
         addressLabel.setFont(FONT_MALGUN);
 
+        contentPane.add(addressLabel, BorderLayout.NORTH);
         contentPane.add(connectionPanel.getPanel(), BorderLayout.WEST);
-        contentPane.add(addressLabel, BorderLayout.CENTER);
+        contentPane.add(browsingPanel.getPanel(), BorderLayout.CENTER);
         contentPane.add(buttonPanel.getPanel(), BorderLayout.SOUTH);
 
         mainFrame = this;

@@ -27,17 +27,19 @@ public class ButtonPanel {
         panel.add(importButton);
 
         exportButton.addActionListener(e -> {
+            String npkiPath = (String) BrowsingPanel.getBrowsingPanel().getPathComboBox().getSelectedItem();
             Connection connection = ConnectionPanel.getConnectionPanel().getConnectionList().getSelectedValue();
             if (Objects.isNull(connection)) {
                 JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "공인인증서를 내보낼 스마트폰을 선택하세요.");
                 return;
             }
-            new Archiver().zip("C:\\Program Files\\NPKI", "NPKI.zip");
+            new Archiver().zip(npkiPath, "NPKI.zip");
             byte[] npki = new FileManager().read("NPKI.zip");
             Server.getServer().send(connection, ByteBuffer.wrap(npki));
             JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "완료되었습니다.");
         });
         importButton.addActionListener(e -> {
+            String npkiPath = (String) BrowsingPanel.getBrowsingPanel().getPathComboBox().getSelectedItem();
             Connection connection = ConnectionPanel.getConnectionPanel().getConnectionList().getSelectedValue();
             if (Objects.isNull(connection)) {
                 JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "공인인증서를 가져올 스마트폰을 선택하세요.");
@@ -50,7 +52,7 @@ public class ButtonPanel {
             }
             byte[] npki = receivedData.array();
             new FileManager().write("NPKI.zip", npki);
-            new Archiver().unzip("NPKI.zip", "C:\\Program Files\\NPKI");
+            new Archiver().unzip("NPKI.zip", npkiPath);
             JOptionPane.showMessageDialog(MainFrame.getMainFrame().getFrame(), "완료되었습니다.");
         });
 

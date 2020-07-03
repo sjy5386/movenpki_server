@@ -1,6 +1,7 @@
 package com.sysbot32.movenpki;
 
 import res.values.Colors;
+import res.values.Fonts;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +21,8 @@ public class ButtonPanel {
         importButton = new JButton("스마트폰 → PC");
 
         panel.setLayout(new GridLayout(1, 2));
-        exportButton.setFont(MainFrame.FONT_MALGUN);
-        importButton.setFont(MainFrame.FONT_MALGUN);
+        exportButton.setFont(Fonts.MALGUN.font);
+        importButton.setFont(Fonts.MALGUN.font);
         exportButton.setBackground(Colors.EXPORT.color);
         importButton.setBackground(Colors.IMPORT.color);
 

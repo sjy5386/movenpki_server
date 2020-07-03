@@ -1,5 +1,7 @@
 package com.sysbot32.movenpki;
 
+import res.values.Fonts;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,9 +20,9 @@ public class ConnectionPanel {
         disconnectButton = new JButton("연결 해제");
 
         panel.setLayout(new BorderLayout());
-        label.setFont(MainFrame.FONT_MALGUN);
-        connectionList.setFont(MainFrame.FONT_MALGUN);
-        disconnectButton.setFont(MainFrame.FONT_MALGUN);
+        label.setFont(Fonts.MALGUN.font);
+        connectionList.setFont(Fonts.MALGUN.font);
+        disconnectButton.setFont(Fonts.MALGUN.font);
         disconnectButton.setBackground(Color.LIGHT_GRAY);
 
         panel.add(label, BorderLayout.NORTH);

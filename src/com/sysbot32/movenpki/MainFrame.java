@@ -1,11 +1,11 @@
 package com.sysbot32.movenpki;
 
+import res.values.Fonts;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame {
-    public static final Font FONT_MALGUN = new Font("맑은 고딕", Font.PLAIN, 16);
-
     private JFrame frame;
     private JPanel contentPane;
     private BrowsingPanel browsingPanel;
@@ -26,7 +26,7 @@ public class MainFrame {
         frame.setSize(600, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane.setLayout(new BorderLayout());
-        addressLabel.setFont(FONT_MALGUN);
+        addressLabel.setFont(Fonts.MALGUN.font);
 
         contentPane.add(addressLabel, BorderLayout.NORTH);
         contentPane.add(connectionPanel.getPanel(), BorderLayout.WEST);

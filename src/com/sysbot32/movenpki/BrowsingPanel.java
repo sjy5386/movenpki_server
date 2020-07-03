@@ -1,5 +1,7 @@
 package com.sysbot32.movenpki;
 
+import res.values.Fonts;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -19,14 +21,14 @@ public class BrowsingPanel {
         pathComboBox = new JComboBox<>(new String[]{System.getProperty("user.home") + "\\AppData\\LocalLow\\NPKI", "C:\\Program Files\\NPKI"});
         browseButton = new JButton("찾아보기...");
 
-        pathLabel.setFont(MainFrame.FONT_MALGUN);
-        pathComboBox.setFont(MainFrame.FONT_MALGUN);
+        pathLabel.setFont(Fonts.MALGUN.font);
+        pathComboBox.setFont(Fonts.MALGUN.font);
         pathComboBox.setBackground(Color.WHITE);
         File[] drives = File.listRoots();
         for (File drive : drives) {
             pathComboBox.addItem(drive.getPath() + "NPKI");
         }
-        browseButton.setFont(MainFrame.FONT_MALGUN);
+        browseButton.setFont(Fonts.MALGUN.font);
         browseButton.setBackground(Color.WHITE);
 
         panel.add(pathLabel);

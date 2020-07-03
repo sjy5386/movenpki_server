@@ -5,8 +5,6 @@ import java.awt.*;
 
 public class MainFrame {
     public static final Font FONT_MALGUN = new Font("맑은 고딕", Font.PLAIN, 16);
-    public static final Color COLOR_EXPORT = new Color(0x42a5f5);
-    public static final Color COLOR_IMPORT = new Color(0xef5350);
 
     private JFrame frame;
     private JPanel contentPane;

@@ -1,5 +1,7 @@
 package com.sysbot32.movenpki;
 
+import res.values.Colors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.nio.ByteBuffer;
@@ -20,8 +22,8 @@ public class ButtonPanel {
         panel.setLayout(new GridLayout(1, 2));
         exportButton.setFont(MainFrame.FONT_MALGUN);
         importButton.setFont(MainFrame.FONT_MALGUN);
-        exportButton.setBackground(MainFrame.COLOR_EXPORT);
-        importButton.setBackground(MainFrame.COLOR_IMPORT);
+        exportButton.setBackground(Colors.EXPORT.color);
+        importButton.setBackground(Colors.IMPORT.color);
 
         panel.add(exportButton);
         panel.add(importButton);

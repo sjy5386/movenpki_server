@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ConnectionPanel {
-    private JPanel panel;
-    private JLabel label;
-    private JList<Connection> connectionList;
-    private JButton disconnectButton;
+    public final JPanel panel;
+    public final JLabel label;
+    public final JList<Connection> connectionList;
+    public final JButton disconnectButton;
 
     private static ConnectionPanel connectionPanel;
 
@@ -35,14 +35,6 @@ public class ConnectionPanel {
         });
 
         connectionPanel = this;
-    }
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public JList<Connection> getConnectionList() {
-        return connectionList;
     }
 
     public static ConnectionPanel getConnectionPanel() {

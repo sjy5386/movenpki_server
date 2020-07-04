@@ -8,10 +8,10 @@ import java.io.File;
 import java.util.Objects;
 
 public class BrowsingPanel {
-    private JPanel panel;
-    private JLabel pathLabel;
-    private JComboBox<String> pathComboBox;
-    private JButton browseButton;
+    public final JPanel panel;
+    public final JLabel pathLabel;
+    public final JComboBox<String> pathComboBox;
+    public final JButton browseButton;
 
     private static BrowsingPanel browsingPanel;
 
@@ -38,7 +38,7 @@ public class BrowsingPanel {
         browseButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            fileChooser.showOpenDialog(MainFrame.getMainFrame().getFrame());
+            fileChooser.showOpenDialog(MainFrame.getMainFrame().frame);
             File file = fileChooser.getSelectedFile();
             if (Objects.nonNull(file)) {
                 pathComboBox.addItem(file.getPath());
@@ -47,14 +47,6 @@ public class BrowsingPanel {
         });
 
         browsingPanel = this;
-    }
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public JComboBox<String> getPathComboBox() {
-        return pathComboBox;
     }
 
     public static BrowsingPanel getBrowsingPanel() {

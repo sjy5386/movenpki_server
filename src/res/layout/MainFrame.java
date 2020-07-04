@@ -7,12 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame {
-    private JFrame frame;
-    private JPanel contentPane;
-    private BrowsingPanel browsingPanel;
-    private ConnectionPanel connectionPanel;
-    private ButtonPanel buttonPanel;
-    private JLabel addressLabel;
+    public final JFrame frame;
+    public final JPanel contentPane;
+    public final BrowsingPanel browsingPanel;
+    public final ConnectionPanel connectionPanel;
+    public final ButtonPanel buttonPanel;
+    public final JLabel addressLabel;
 
     private static MainFrame mainFrame;
 
@@ -30,15 +30,11 @@ public class MainFrame {
         addressLabel.setFont(Fonts.MALGUN.font);
 
         contentPane.add(addressLabel, BorderLayout.NORTH);
-        contentPane.add(connectionPanel.getPanel(), BorderLayout.WEST);
-        contentPane.add(browsingPanel.getPanel(), BorderLayout.CENTER);
-        contentPane.add(buttonPanel.getPanel(), BorderLayout.SOUTH);
+        contentPane.add(connectionPanel.panel, BorderLayout.WEST);
+        contentPane.add(browsingPanel.panel, BorderLayout.CENTER);
+        contentPane.add(buttonPanel.panel, BorderLayout.SOUTH);
 
         mainFrame = this;
-    }
-
-    public JFrame getFrame() {
-        return frame;
     }
 
     public static MainFrame getMainFrame() {

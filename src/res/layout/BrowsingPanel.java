@@ -1,4 +1,4 @@
-package com.sysbot32.movenpki;
+package res.layout;
 
 import res.values.Fonts;
 

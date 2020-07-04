@@ -1,5 +1,6 @@
-package com.sysbot32.movenpki;
+package res.layout;
 
+import com.sysbot32.movenpki.Server;
 import res.values.Fonts;
 
 import javax.swing.*;

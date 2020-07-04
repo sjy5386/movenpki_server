@@ -1,5 +1,9 @@
-package com.sysbot32.movenpki;
+package res.layout;
 
+import com.sysbot32.movenpki.Archiver;
+import com.sysbot32.movenpki.Connection;
+import com.sysbot32.movenpki.FileManager;
+import com.sysbot32.movenpki.Server;
 import res.values.Colors;
 import res.values.Fonts;
 

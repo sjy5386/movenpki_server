@@ -1,5 +1,7 @@
 package com.sysbot32.movenpki;
 
+import res.layout.ConnectionPanel;
+
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
